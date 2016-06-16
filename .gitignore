@@ -65,4 +65,11 @@ target/
 *[#]*
 [#]*[#]*
 # Mechanize
-mechanize/
+mechanize-0.2.5
+
+#intellij
+*.iml
+.idea
+
+#outputfile
+meck.txt
