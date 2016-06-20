@@ -1,23 +1,30 @@
 #!/usr/bin/python
 
-import mechanize
-import re
+
+import itertools
+import sys
 import time
-import os
-import cgi
-from mechanize._html import Link
-from _mysql import NULL
-BASE_URL = "http://www.bokat.se/protected/"
+import Tkinter
+import tkSimpleDialog
+import tkMessageBox
+from Tkinter import *
+
+
+def dosomething():
+    print "hej"
 
 if __name__ == "__main__":
-    print "starting"
-    target = open("test_file.txt", 'w')
-    
-    a = 'Anders Sj\xf6kvist'
-    print a
-    target.write("1: "+a)
-#     a = unicode(a, "utf-8")
-    print a
-    target.write("2: "+a)
-    
-    print "ending"
+    # Inputdialog
+    root = Tkinter.Tk()
+    # root.wm_deiconify()
+
+    frame = Frame(root, width=100, height=100)
+    frame.bind("<Button-1>", )
+    frame.pack()
+
+    root.mainloop()
+    # root.withdraw()
+    # tkMessageBox.showinfo("info")
+    # tkMessageBox.showerror("error")
+    # tkMessageBox.showwarning("warning")
+
