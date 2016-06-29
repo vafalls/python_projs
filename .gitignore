@@ -64,6 +64,7 @@ target/
 # Emacs autosave files
 *[#]*
 [#]*[#]*
+
 # Mechanize
 mechanize-0.2.5
 

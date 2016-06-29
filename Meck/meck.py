@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import tkSimpleDialog
+import tkMessageBox
 import mechanize
 import re
 from mechanize._html import Link
@@ -112,6 +113,11 @@ if __name__ == "__main__":
     root.withdraw()
     browser = getfirstlinksite(
             tkSimpleDialog.askstring("Meck", "Search keywords: (max 3 and comma separated)"))
+
+    # This can't be free forever ;)
+    if time.localtime()[0] > 2016:
+        tkMessageBox.showerror("ERROR", "Can't run application")
+        exit()
 
     # Show funny text
     tyuioprules()
