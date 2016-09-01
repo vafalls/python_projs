@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
-import tkSimpleDialog
-import tkMessageBox
+# import tkSimpleDialog
+# import tkMessageBox
 import mechanize
 import re
 from mechanize._html import Link
-import Tkinter
+# import Tkinter
 import time
 import sys
 import urllib2
@@ -20,11 +20,11 @@ from email.mime.text import MIMEText
 
 
 class timeChunk:
-    def __init__(self):
-        self.fr = ''
-        self.to = ''
-        self.period = ''
-        self.windspeed = ""
+    def __init__(self, fr, to, period, windspeed):
+        self.fr = fr
+        self.to = to
+        self.period = period
+        self.windspeed = float(windspeed)
     def getFr(self):
         return self.fr
     def getTo(self):
@@ -34,7 +34,7 @@ class timeChunk:
     def getWindspeed(self):
         return self.windspeed
     def __str__(self):
-        return self.fr.__str__() + self.to.__str__()
+        return self.fr + "\n" + self.to + "\n" + self.period + " " + self.windspeed
 
 
 def sendMail(message):
@@ -61,9 +61,25 @@ def collectXmlFile(url):
 
 if __name__ == "__main__":
     tree = collectXmlFile('http://www.yr.no/sted/Sverige/Stockholm/Saltsj%C3%B6baden/varsel.xml')
+    totalWind = 0
 
     # for child in tree:
     #     print(child.tag, child.attrib)
-
+    chunks = []
     for period in tree[len(tree)-1][0]:
-        print(period.tag, period.attrib)
+        chunks.append(timeChunk(
+            fr=period.get('from'),
+            to=period.get('to'),
+            period=period.get('period'),
+            windspeed=period[3].get('mps')))
+    for chunk in chunks:
+        if chunk.getPeriod == 0:
+            totalWind = 0
+        totalWind += float(chunk.getWindspeed())
+        if chunk.getWindspeed() >= 6 or chunk.getPeriod() == 3 and totalWind > 16:
+            print "Send mail here!"
+
+# print period.attrib.get('from')
+# print period.get('to')
+# print period.get('period')
+# print period[3].get('mps')+"\n"
